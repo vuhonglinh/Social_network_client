@@ -7,7 +7,6 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
 import {
     Dialog,
-    DialogClose,
     DialogContent,
     DialogDescription,
     DialogFooter,
@@ -22,7 +21,6 @@ import { toast } from "@/components/ui/use-toast"
 import useEcho from "@/hooks/echo"
 import { formSchemaPost } from "@/schema/post.schema"
 import postService from "@/services/post"
-import { UserType } from "@/type/auth.type"
 import { PostType } from "@/type/post.type"
 import { ResponseType } from "@/type/type"
 import { zodResolver } from "@hookform/resolvers/zod"

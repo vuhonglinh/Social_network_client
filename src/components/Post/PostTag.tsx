@@ -3,6 +3,7 @@ import { Dialog, DialogContent, DialogTrigger, DialogTitle } from '@/components/
 import { UserType } from '@/type/auth.type';
 import React from 'react';
 import { VisuallyHidden } from '@reach/visually-hidden';
+import Link from 'next/link';
 
 export default function PostTag({ postTags }: { postTags: UserType[] }) {
     return (
@@ -13,9 +14,9 @@ export default function PostTag({ postTags }: { postTags: UserType[] }) {
                         cùng với
                     </span>
                     {postTags?.slice(0, 1).map((user) => (
-                        <span key={user.id} className="ml-1 text-sm font-medium leading-none">
+                        <Link href={`${user.name}.${user.id}`} key={user.id} className="ml-1 text-sm font-medium leading-none">
                             {user.name}
-                        </span>
+                        </Link>
                     ))}
                     {postTags.length > 1 && (
                         <>
@@ -33,7 +34,7 @@ export default function PostTag({ postTags }: { postTags: UserType[] }) {
                                         <DialogTitle>Danh sách những người khác</DialogTitle>
                                     </VisuallyHidden>
                                     {postTags?.slice(1).map((user) => (
-                                        <div key={user.id} className="flex items-center gap-4">
+                                        <Link href={`${user.name}.${user.id}`} key={user.id} className="flex items-center gap-4">
                                             <Avatar className="hidden h-9 w-9 sm:flex">
                                                 <AvatarImage src="https://picsum.photos/50/50" alt="Avatar" />
                                             </Avatar>
@@ -45,7 +46,7 @@ export default function PostTag({ postTags }: { postTags: UserType[] }) {
                                                     {user.email}
                                                 </p>
                                             </div>
-                                        </div>
+                                        </Link>
                                     ))}
                                 </DialogContent>
                             </Dialog>

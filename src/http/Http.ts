@@ -1,6 +1,7 @@
 import { TokenType, UserType } from '@/type/auth.type';
 import axios from 'axios';
 import { normalize } from 'path';
+import Cookies from 'js-cookie';
 
 class Http {
     public instance;
@@ -31,10 +32,12 @@ class Http {
                     localStorage.setItem('access_token', access_token);
                     localStorage.setItem('refresh_token', refresh_token);
                     localStorage.setItem('user', JSON.stringify(user));
+                    Cookies.set('sessionToken', access_token, { path: '/', sameSite: 'lax', secure: true });
                 } else if ('/logout' === normalize(url || '')) {
                     localStorage.removeItem('access_token');
                     localStorage.removeItem('refresh_token');
                     localStorage.removeItem('user');
+                    Cookies.remove('sessionToken', { path: '/' });
                 }
                 return response;
             },

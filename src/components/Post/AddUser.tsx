@@ -39,8 +39,10 @@ export default function AddUser({ setIds, ids }: Props) {
                         <h4 className="mb-4 text-sm font-medium leading-none">Danh sách bạn bè</h4>
                         {users.map((user) => (
                             <div key={user.id} className='cursor-pointer hover:text-cyan-600' onClick={() => handleClick(user)}>
-                                <div key={user.id} className="text-sm flex-1">
-                                    {user.name}
+                                <div key={user.id} className="flex justify-between">
+                                    <p className='overflow-hidden text-ellipsis whitespace-nowrap w-[120px]'>
+                                        {user.name}
+                                    </p>
                                     {ids.includes(String(user.id)) ? (
                                         <CircleCheck className='text-green-400 float-end' fill='white' />
                                     ) : (

@@ -1,20 +1,18 @@
-import React from 'react'
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Button } from '@/components/ui/button'
 import {
-    Bell,
     Home,
     LineChart,
     Package,
     Package2,
     PanelLeft,
-    Search,
     ShoppingCart,
     Users2,
 } from "lucide-react"
 import Link from 'next/link'
-import { Input } from '@/components/ui/input'
 import Notification from '@/components/Notification'
+import SearchUser from '@/components/SearchUser'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 export default function Header() {
 
     return (
@@ -74,21 +72,23 @@ export default function Header() {
                 </SheetContent>
             </Sheet>
             <div className='flex gap-2'>
-                <Button
-                    variant="outline"
-                    size="icon"
-                    className="overflow-hidden rounded-full"
-                >
-                    <img className="w-[36px] h-[36px] overflow-hidden rounded-full" src="https://picsum.photos/50/50" alt="User Avatar" />
-                </Button>
-                <div className="relative flex-1 md:grow-0">
-                    <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                    <Input
-                        type="search"
-                        placeholder="Search..."
-                        className="w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[336px]"
-                    />
-                </div>
+                <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                        <Button
+                            variant="outline"
+                            size="icon"
+                            className="overflow-hidden rounded-full"
+                        >
+                            <img className="w-[36px] h-[36px] overflow-hidden rounded-full" src="https://picsum.photos/50/50" alt="User Avatar" />
+                        </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="center">
+                        <DropdownMenuLabel>
+                            <Link href={"/profile"}>Hồ sơ</Link>
+                        </DropdownMenuLabel>
+                    </DropdownMenuContent>
+                </DropdownMenu>
+                <SearchUser />
             </div>
             <Notification />
         </header>

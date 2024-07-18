@@ -5,6 +5,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTrigger } from '@/components/ui/
 import postService from '@/services/post'
 import { PostType } from '@/type/post.type'
 import { SendHorizontal } from 'lucide-react'
+import Link from 'next/link'
 import { forwardRef, useImperativeHandle, useRef, useState } from 'react'
 
 const SheetComment = forwardRef(({ post }: { post: PostType | null }, ref) => {
@@ -41,9 +42,9 @@ const SheetComment = forwardRef(({ post }: { post: PostType | null }, ref) => {
                             <AvatarFallback>OM</AvatarFallback>
                         </Avatar>
                         <div className="grid gap-1">
-                            <span className="text-sm font-medium leading-none">
+                            <Link href={`${post?.user.name}.${post?.user.id}`} className="text-sm font-medium leading-none">
                                 {post?.user.name}
-                            </span>
+                            </Link>
                             <span className="text-sm text-muted-foreground">
                                 {post && formattedCreatedAt(post?.created_at)}
                             </span>
@@ -69,7 +70,7 @@ const SheetComment = forwardRef(({ post }: { post: PostType | null }, ref) => {
                     <ListComment post={post} />
                 </div>
             </SheetContent>
-        </Sheet>
+        </Sheet >
     )
 })
 

@@ -21,6 +21,9 @@ export type UserType = {
     created_at: string;
     id: number;
     status?: boolean
+    avatar?: string;
+    address?: string;
+    cover_image?: string;
 }
 
 

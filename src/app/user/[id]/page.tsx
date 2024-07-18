@@ -12,24 +12,25 @@ import { ChatType } from "@/type/chat.type";
 import { CornerDownLeft, Mic, Paperclip } from "lucide-react";
 import { useEffect, useMemo, useState } from "react"
 import ScrollToBottom from "react-scroll-to-bottom";
-import { useImmer } from "use-immer";
 
 export default function MainChat(params: any) {
     const id = params.params.id;
     const [user, setUser] = useState<UserType | undefined>()
     const [message, setMessage] = useState<string>('')
-    const [messages, setMessages] = useImmer<ChatType[]>([])
+    const [messages, setMessages] = useState<ChatType[]>([])
     const authUser = JSON.parse(localStorage.getItem('user') ?? "");
 
     useEffect(() => {
         chatService.getChatDetails(id).then((result) => {
             setMessages(result.data.data);
-        });
+        }).catch((error) => {});
     }, [id]);
 
     useEffect(() => {
         authService.getUser({ id }).then((result) => {
             setUser(result.data.data);
+        }).catch((error) => {
+
         })
     }, [id]);
 
@@ -48,7 +49,7 @@ export default function MainChat(params: any) {
             chatService.send({ id, message }).then((result) => {
                 setMessages(prevMessages => [...prevMessages, result.data.data]);
                 setMessage("");
-            })
+            }).catch((error) => {});
         }
     };
 

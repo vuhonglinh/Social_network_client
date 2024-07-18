@@ -1,4 +1,3 @@
-"use client"
 import {
     TooltipProvider,
 } from "@/components/ui/tooltip"
@@ -16,12 +15,7 @@ export default function Layout({
             <div className="flex min-h-screen w-full flex-col bg-muted/40">
                 <Sidebar />
                 <div className="flex sm:pl-14">
-                    <div className="w-1/3">
-                        <SidebarChat />
-                    </div>
-                    <div className="w-2/3">
-                        {children}
-                    </div>
+                    {children}
                 </div>
             </div>
         </TooltipProvider>

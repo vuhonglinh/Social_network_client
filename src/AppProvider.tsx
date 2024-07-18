@@ -7,15 +7,15 @@ import { isClient } from '@/http/Http';
 interface AppContextType {
     user: UserType | null
     setUser: (user: UserType | null) => void
-    users: UserType[],
-    setUsers: React.Dispatch<React.SetStateAction<UserType[]>>
+    users: UserType[] | []
+    setUsers: (user: UserType[] | []) => void
 }
 
 export const AppContext = createContext<AppContextType>({
     user: null,
     setUser: () => { },
     users: [],
-    setUsers: () => { }
+    setUsers: () => { },
 });
 
 export const useAppContext = () => {
@@ -30,22 +30,18 @@ export default function AppProvider({ children }: { children: React.ReactNode })
         }
         return null
     })
+    const [users, setUsers] = useState<UserType[]>([])
 
     const setUser = (user: UserType | null) => {
         setUserState(user)
         localStorage.setItem('user', JSON.stringify(user))
     }
 
-    const [users, setUsers] = useState<UserType[]>([]);
-
     useEffect(() => {
-        authService.getUsers().then((res) => {
-            setUsers(res.data.data);
-        }).catch((err) => {
+        authService.getUsers().then((res) => setUsers(res.data.data)).catch((err) => {
 
-        });
-    }, []);
-
+        })
+    }, [])
 
     return (
         <AppContext.Provider value={{ user, setUser, users, setUsers }}>

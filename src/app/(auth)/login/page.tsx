@@ -23,6 +23,7 @@ import { ToastAction } from "@radix-ui/react-toast"
 import { Checkbox } from "@/components/ui/checkbox"
 import { useRouter } from 'next/navigation'
 import { useEffect } from "react"
+import { useAppContext } from "@/AppProvider"
 
 
 interface FormLoginType {
@@ -33,6 +34,7 @@ interface FormLoginType {
 
 export default function LoginForm() {
     const router = useRouter()
+    const { setUser } = useAppContext();
     useEffect(() => {
         authService.rememberMe().then((res) => {
             if (res.status === 200) {
@@ -58,6 +60,7 @@ export default function LoginForm() {
     const handleLogin = async (value: FormLoginType) => {
         try {
             const res = await authService.login(value);
+            setUser(res.data.data.user)
             toast({
                 description: res.data.message
             })
@@ -146,7 +149,7 @@ export default function LoginForm() {
                             )}
                         />
                         <Button type="submit" className="w-full">
-                            Login
+                            Đăng nhập
                         </Button>
                         <Button onClick={handleLoginGoogle} type="button" className="w-full bg-cyan-50 text-black hover:text-white">
                             Đăng nhập bằng Google

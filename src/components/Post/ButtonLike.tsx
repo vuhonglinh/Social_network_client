@@ -14,6 +14,7 @@ export default function ButtonLike({ post }: { post: PostType }) {
         postService.postLike({ post_id: post.id }).then((res) => {
             setLiked(!liked)
         }).catch((err) => {
+            console.log(err)
         });
 
     };
@@ -21,7 +22,8 @@ export default function ButtonLike({ post }: { post: PostType }) {
     useEffect(() => {
         const check = post.users.find((user) => user.id == user.id);
         setLiked(Boolean(check))
-    }, [post, liked])
+    }, [post, liked, user])
+
     return (
         <button
             ref={buttonRef}

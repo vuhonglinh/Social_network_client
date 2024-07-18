@@ -13,7 +13,6 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Circle } from "lucide-react";
 import useEcho from "@/hooks/echo";
 import { usePathname } from "next/navigation";
-import { date } from "zod";
 
 
 export default function SidebarChat() {
